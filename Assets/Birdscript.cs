@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Birdscript : MonoBehaviour
@@ -19,6 +20,11 @@ public class Birdscript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) == true && isBirdAlive)
         {
             myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
+        }
+        if(myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5)
+        {
+            isBirdAlive=false;
+            LogicScript.gameoverscreen();
         }
     }
 
