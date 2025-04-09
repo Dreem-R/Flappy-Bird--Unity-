@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class LogicScript : MonoBehaviour
     public Text scoredisplay;
     public Text highestscored;
     public int highscore;
+    public GameObject pausescreen;
 
     [ContextMenu("Increase Score")]
     public void addscore(int Scoretoadd)
@@ -46,5 +48,25 @@ public class LogicScript : MonoBehaviour
     {
         PlayerPrefs.SetInt("Highscore",playerscore);
         PlayerPrefs.Save();
+    }
+
+    public void pause()
+    {
+        if (!gameover.activeSelf)
+        {
+            pausescreen.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void resume()
+    {
+        pausescreen.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void exit()
+    {
+        Application.Quit();
     }
 }

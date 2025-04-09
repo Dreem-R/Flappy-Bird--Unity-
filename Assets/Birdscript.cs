@@ -21,11 +21,17 @@ public class Birdscript : MonoBehaviour
         {
             myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
         }
+
+        else if (Input.GetKeyDown(KeyCode.Escape)){
+            LogicScript.pause();
+        }
+
         if(myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5)
         {
             isBirdAlive=false;
             LogicScript.gameoverscreen();
         }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
