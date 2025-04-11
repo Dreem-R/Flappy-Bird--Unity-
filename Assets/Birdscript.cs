@@ -8,9 +8,15 @@ public class Birdscript : MonoBehaviour
     public float flapspeed;
     public LogicScript LogicScript;
     public bool isBirdAlive = true;
+    Sound_Manager soundManager;
 
+    private void Awake()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("Soundfx").GetComponent<Sound_Manager>();
+    }
     void Start()
     {
+
         LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
@@ -20,23 +26,31 @@ public class Birdscript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) == true && isBirdAlive)
         {
             myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
+            soundManager.PlaySFX(soundManager.flap);
         }
 
         else if (Input.GetKeyDown(KeyCode.Escape)){
             LogicScript.pause();
         }
 
-        if(myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5)
+        if((myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5 ) && isBirdAlive==true)
         {
             isBirdAlive=false;
             LogicScript.gameoverscreen();
         }
         
     }
-
+    public bool getbird()
+    {
+        return isBirdAlive;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        LogicScript.gameoverscreen();
-        isBirdAlive = false;
+        if (isBirdAlive == true)
+        {
+            soundManager.PlaySFX(soundManager.death);
+            LogicScript.gameoverscreen();
+            isBirdAlive = false;
+        }
     }
 }

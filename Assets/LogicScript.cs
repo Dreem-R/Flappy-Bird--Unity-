@@ -14,10 +14,17 @@ public class LogicScript : MonoBehaviour
     public Text highestscored;
     public int highscore;
     public GameObject pausescreen;
+    Sound_Manager soundmanager;
+
+    private void Awake()
+    {
+        soundmanager = GameObject.FindGameObjectWithTag("Soundfx").GetComponent<Sound_Manager>();
+    }
 
     [ContextMenu("Increase Score")]
     public void addscore(int Scoretoadd)
     {
+        soundmanager.PlaySFX(soundmanager.point);
         playerscore++;
         scoretext.text = playerscore.ToString();
     }
@@ -25,6 +32,8 @@ public class LogicScript : MonoBehaviour
     public void restartgame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+
     }
 
     public void gameoverscreen()
@@ -34,6 +43,7 @@ public class LogicScript : MonoBehaviour
         if (playerscore > highscore)
         {
             Savehighscore();
+            highscore = playerscore;
         }
         highestscored.text = "Highest Score : " + highscore.ToString();
         gameover.SetActive(true);
