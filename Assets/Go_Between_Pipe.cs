@@ -8,12 +8,16 @@ public class Go_Between_Pipe : Agent
     public LogicScript LogicScript;
     public Birdscript Birdscript;
     public RayPerceptionSensorComponent3D raySensor;
-    public bool isbirdalive;
     public Vector3 startPosition;
     public GameManger gameManager;
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        if (!Birdscript.isBirdAlive)
+        {
+            return;
+        }
+
         AddReward(0.1f);
         int action = actions.DiscreteActions[0];
 
@@ -35,23 +39,31 @@ public class Go_Between_Pipe : Agent
 
     public override void OnEpisodeBegin()
     {
-        gameObject.SetActive(true);
         transform.position = startPosition;
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().angularVelocity = 0f;
-        GetComponent<Rigidbody2D>().transform.rotation = Quaternion.identity; 
-        isbirdalive = true;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = Vector2.zero;  // Clear linear velocity
+        rb.angularVelocity = 0f;     // Clear angular velocity
+        transform.rotation = Quaternion.identity;  // Reset rotation to default
+
         Birdscript.isBirdAlive = true;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (Birdscript.isBirdAlive && other.CompareTag("Score"))
+        {
+            AddReward(0.5f);  // reward for crossing pipe
+            Debug.Log("Passed pipe!");
+        }
     }
 
     public void death()
     {
-        if (!isbirdalive) return; // prevent duplicate calls
-
-        isbirdalive = false;
+        Debug.Log("Bird Died At Go_between_Pipe Death()");
         AddReward(-1.0f);
         gameManager.AgentDied();  // triggers centralized check
-        gameObject.SetActive(false);
     }
 
 

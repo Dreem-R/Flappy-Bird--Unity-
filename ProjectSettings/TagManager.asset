@@ -8,6 +8,7 @@ TagManager:
   - Soundfx
   - Hitting
   - Ml_Manager
+  - Score
   layers:
   - Default
   - TransparentFX

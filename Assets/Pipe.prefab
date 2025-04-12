@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5305834055590186260}
   m_Layer: 7
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogicScript: {fileID: 0}
   birdobj: {fileID: 0}
+  Go_Between_Pipe: {fileID: 0}
 --- !u!1 &3165891820527680595
 GameObject:
   m_ObjectHideFlags: 0

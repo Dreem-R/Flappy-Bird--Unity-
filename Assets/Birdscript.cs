@@ -40,16 +40,21 @@ public class Birdscript : MonoBehaviour
         if((myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5 ) && isBirdAlive==true)
         {
             isBirdAlive=false;
+            Debug.Log("Bird Died Out Of Screen Check");
             Go_Between_Pipe.death();
         }
         
     }
     public void jump()
     {
-        if (isBirdAlive == true)
+        if (isBirdAlive)
         {
             myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
             soundManager.PlaySFX(soundManager.flap);
+        }
+        else
+        {
+            Debug.Log("Bird Not Alive");
         }
     }
     public bool getbird()
@@ -58,10 +63,11 @@ public class Birdscript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isBirdAlive == true)
+        if (isBirdAlive == true && collision.gameObject.layer == LayerMask.NameToLayer("Hittable"))
         {
             soundManager.PlaySFX(soundManager.death);
             isBirdAlive = false;
+            Debug.Log("Bird Died At Birdscript collison()");
             Go_Between_Pipe.death();
         }
     }

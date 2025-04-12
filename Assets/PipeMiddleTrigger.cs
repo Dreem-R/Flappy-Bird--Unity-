@@ -4,10 +4,12 @@ using UnityEngine;
 public class PipeMiddleTrigger : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+    /*
     public LogicScript LogicScript;
     public Birdscript birdobj;
     public Go_Between_Pipe Go_Between_Pipe;
-
+    
     void Start()
     {
         LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
@@ -24,4 +26,5 @@ public class PipeMiddleTrigger : MonoBehaviour
             Go_Between_Pipe.AddReward(0.5f);
         }
     }
+    */
 }
