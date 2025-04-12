@@ -13,8 +13,10 @@ public class LogicScript : MonoBehaviour
     public Text scoredisplay;
     public Text highestscored;
     public int highscore;
+    public Birdscript Birdscript;
     public GameObject pausescreen;
     Sound_Manager soundmanager;
+    public PipeSpawn PipeSpawn;
 
     private void Awake()
     {
@@ -31,9 +33,13 @@ public class LogicScript : MonoBehaviour
 
     public void restartgame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
-
+        playerscore = 0;
+        scoretext.text = "0";
+        // Reset bird position, velocity, and other game elements here
+        Birdscript.myRigidbody2D.linearVelocity = Vector2.zero;
+        Birdscript.transform.position = new Vector3(0, 0, 0);  // Set to initial position
+        Birdscript.isBirdAlive = true;
+        PipeSpawn.ResetPipes();
     }
 
     public void gameoverscreen()

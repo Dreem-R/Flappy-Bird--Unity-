@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PipeSpawn : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject thepipe;
+    public List<GameObject> pipes = new List<GameObject>();
     public float spawnrate = 2;
     private float timer = 0;
     public float heightoffset = 10;
@@ -27,12 +29,27 @@ public class PipeSpawn : MonoBehaviour
         }
     }
 
+    public void ResetPipes()
+    {
+        foreach (var pipe in pipes)
+        {
+            if (pipe != null)
+            {
+                Destroy(pipe);
+            }
+        }
+        pipes.Clear();
+        timer = 0;
+
+        spawnpipe();
+    }
+
     void spawnpipe()
     {
         float lowestpoint = transform.position.y - heightoffset;
         float highestpoint = transform.position.y + heightoffset;
 
-        Instantiate(thepipe, new Vector3(transform.position.x, Random.Range(lowestpoint, highestpoint)), transform.rotation);
-
+        GameObject newpipe = Instantiate(thepipe, new Vector3(transform.position.x, Random.Range(lowestpoint, highestpoint)), transform.rotation);
+        pipes.Add(newpipe);
     }
 }

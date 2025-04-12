@@ -9,15 +9,20 @@ public class Birdscript : MonoBehaviour
     public LogicScript LogicScript;
     public bool isBirdAlive = true;
     Sound_Manager soundManager;
+    public Go_Between_Pipe Go_Between_Pipe;
 
     private void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Soundfx").GetComponent<Sound_Manager>();
+        LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        if (Go_Between_Pipe == null)
+        {
+            Go_Between_Pipe = GetComponent<Go_Between_Pipe>();
+        }
     }
     void Start()
     {
 
-        LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
@@ -25,8 +30,7 @@ public class Birdscript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) == true && isBirdAlive)
         {
-            myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
-            soundManager.PlaySFX(soundManager.flap);
+            jump();
         }
 
         else if (Input.GetKeyDown(KeyCode.Escape)){
@@ -36,9 +40,14 @@ public class Birdscript : MonoBehaviour
         if((myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5 ) && isBirdAlive==true)
         {
             isBirdAlive=false;
-            LogicScript.gameoverscreen();
+            Go_Between_Pipe.death();
         }
         
+    }
+    public void jump()
+    {
+        myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
+        soundManager.PlaySFX(soundManager.flap);
     }
     public bool getbird()
     {
@@ -49,8 +58,8 @@ public class Birdscript : MonoBehaviour
         if (isBirdAlive == true)
         {
             soundManager.PlaySFX(soundManager.death);
-            LogicScript.gameoverscreen();
             isBirdAlive = false;
+            Go_Between_Pipe.death();
         }
     }
 }
