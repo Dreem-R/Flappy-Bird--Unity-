@@ -2,22 +2,22 @@
     "Flappy_Bird": {
         "checkpoints": [
             {
-                "steps": 10901,
-                "file_path": "results\\Test1\\Flappy_Bird\\Flappy_Bird-10901.onnx",
-                "reward": 2.336842260862652,
-                "creation_time": 1744461905.2817373,
+                "steps": 434715,
+                "file_path": "results\\Test1\\Flappy_Bird\\Flappy_Bird-434715.onnx",
+                "reward": 4180.900373544012,
+                "creation_time": 1744466334.8217835,
                 "auxillary_file_paths": [
-                    "results\\Test1\\Flappy_Bird\\Flappy_Bird-10901.pt"
+                    "results\\Test1\\Flappy_Bird\\Flappy_Bird-434715.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 10901,
+            "steps": 434715,
             "file_path": "results\\Test1\\Flappy_Bird.onnx",
-            "reward": 2.336842260862652,
-            "creation_time": 1744461905.2817373,
+            "reward": 4180.900373544012,
+            "creation_time": 1744466334.8217835,
             "auxillary_file_paths": [
-                "results\\Test1\\Flappy_Bird\\Flappy_Bird-10901.pt"
+                "results\\Test1\\Flappy_Bird\\Flappy_Bird-434715.pt"
             ]
         }
     },
