@@ -20,7 +20,7 @@ public class PipeMiddleTrigger : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bird") && birdobj.getbird())
         {
-            LogicScript.addscore(1);
+            //LogicScript.addscore(1);
             Go_Between_Pipe.AddReward(0.5f);
         }
     }

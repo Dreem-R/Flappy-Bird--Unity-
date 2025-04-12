@@ -10,7 +10,6 @@ public class PipeSpawn : MonoBehaviour
     private float timer = 0;
     public float heightoffset = 10;
     
-    /*
     void Start()
     {
         spawnpipe();
@@ -29,7 +28,7 @@ public class PipeSpawn : MonoBehaviour
             timer = 0;
         }
     }
-    */
+    
 
     public void ResetPipes()
     {

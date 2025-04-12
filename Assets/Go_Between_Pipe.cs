@@ -8,6 +8,9 @@ public class Go_Between_Pipe : Agent
     public LogicScript LogicScript;
     public Birdscript Birdscript;
     public RayPerceptionSensorComponent3D raySensor;
+    public bool isbirdalive;
+    public Vector3 startPosition;
+    public GameManger gameManager;
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -24,17 +27,24 @@ public class Go_Between_Pipe : Agent
     {
         base.Initialize();
         Debug.Log("Agent Initialized");
+        startPosition = transform.position;
         raySensor = GetComponentInChildren<RayPerceptionSensorComponent3D>();
     }
 
     public override void OnEpisodeBegin()
     {
-        LogicScript.restartgame();
+        transform.position = startPosition;
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        GetComponent<Rigidbody2D>().transform.rotation = Quaternion.identity; 
+        isbirdalive = true;
+        Birdscript.isBirdAlive = true;
     }
 
     public void death()
     {
         AddReward(-1.0f);
+        gameManager.AgentDied();
         EndEpisode();
     }
 
