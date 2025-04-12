@@ -28,6 +28,8 @@ public class Go_Between_Pipe : Agent
         base.Initialize();
         Debug.Log("Agent Initialized");
         startPosition = transform.position;
+        Birdscript = GetComponent<Birdscript>();
+        gameManager = GameObject.FindGameObjectWithTag("Ml_Manager").GetComponent<GameManger>();
         raySensor = GetComponentInChildren<RayPerceptionSensorComponent3D>();
     }
 
