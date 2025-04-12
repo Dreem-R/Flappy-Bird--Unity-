@@ -66,12 +66,12 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: Test1
+  run_id: Pipe_Test
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
-  train_model: true
+  resume: false
+  force: true
+  train_model: false
   inference: false
   results_dir: results
 torch_settings:

@@ -28,7 +28,7 @@ public class Birdscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) == true && isBirdAlive)
+        if (Input.GetKeyDown(KeyCode.Space) == true)
         {
             jump();
         }
@@ -46,8 +46,11 @@ public class Birdscript : MonoBehaviour
     }
     public void jump()
     {
-        myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
-        soundManager.PlaySFX(soundManager.flap);
+        if (isBirdAlive == true)
+        {
+            myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
+            soundManager.PlaySFX(soundManager.flap);
+        }
     }
     public bool getbird()
     {

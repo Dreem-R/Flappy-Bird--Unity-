@@ -26,12 +26,13 @@ public class GameManger : MonoBehaviour
     void ResetEnvironment()
     {
         pipeSpawner.ResetPipes();
-        aliveAgents = agents.Count;
 
         foreach (var agent in agents)
         {
-            agent.EndEpisode();  // OnEpisodeBegin will be called next
+            agent.EndEpisode(); // resets position & flags via OnEpisodeBegin
         }
+
+        aliveAgents = agents.Count;
     }
 }
 

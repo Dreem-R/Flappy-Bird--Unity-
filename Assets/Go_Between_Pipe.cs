@@ -35,6 +35,7 @@ public class Go_Between_Pipe : Agent
 
     public override void OnEpisodeBegin()
     {
+        gameObject.SetActive(true);
         transform.position = startPosition;
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         GetComponent<Rigidbody2D>().angularVelocity = 0f;
@@ -45,10 +46,14 @@ public class Go_Between_Pipe : Agent
 
     public void death()
     {
+        if (!isbirdalive) return; // prevent duplicate calls
+
+        isbirdalive = false;
         AddReward(-1.0f);
-        gameManager.AgentDied();
-        EndEpisode();
+        gameManager.AgentDied();  // triggers centralized check
+        gameObject.SetActive(false);
     }
+
 
     public void reward(float delta)
     {
