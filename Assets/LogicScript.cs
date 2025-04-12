@@ -38,6 +38,8 @@ public class LogicScript : MonoBehaviour
         // Reset bird position, velocity, and other game elements here
         Birdscript.myRigidbody2D.linearVelocity = Vector2.zero;
         Birdscript.transform.position = new Vector3(0, 0, 0);  // Set to initial position
+        Birdscript.transform.rotation = Quaternion.identity;
+        Birdscript.myRigidbody2D.angularVelocity = 0f;
         Birdscript.isBirdAlive = true;
         PipeSpawn.ResetPipes();
     }

@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  FlappyBird:
+  Flappy_Bird:
     trainer_type: ppo
     hyperparameters:
       batch_size: 1024
