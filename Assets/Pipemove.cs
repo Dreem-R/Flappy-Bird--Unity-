@@ -8,7 +8,7 @@ public class Pipemove : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,7 +17,6 @@ public class Pipemove : MonoBehaviour
         transform.position = transform.position + (Vector3.left * movespeed) * Time.deltaTime;
         if (transform.position.x < deadpoint)
         {
-            Debug.Log("Pipe Deleted");
             Destroy(gameObject);
         }
     }
