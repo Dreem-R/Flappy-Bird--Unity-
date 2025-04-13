@@ -41,7 +41,8 @@ public class LogicScript : MonoBehaviour
         Birdscript.transform.rotation = Quaternion.identity;
         Birdscript.myRigidbody2D.angularVelocity = 0f;
         Birdscript.isBirdAlive = true;
-        //PipeSpawn.ResetPipes();
+        
+        PipeSpawn.ResetPipes();
     }
 
     public void gameoverscreen()

@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Birdscript : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class Birdscript : MonoBehaviour
     public bool isBirdAlive = true;
     Sound_Manager soundManager;
     public Go_Between_Pipe Go_Between_Pipe;
-
     private void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Soundfx").GetComponent<Sound_Manager>();
@@ -39,7 +39,6 @@ public class Birdscript : MonoBehaviour
 
         if((myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5 ) && isBirdAlive==true)
         {
-            isBirdAlive=false;
             Debug.Log("Bird Died Out Of Screen Check");
             Go_Between_Pipe.death();
         }
@@ -66,7 +65,6 @@ public class Birdscript : MonoBehaviour
         if (isBirdAlive == true && collision.gameObject.layer == LayerMask.NameToLayer("Hittable"))
         {
             soundManager.PlaySFX(soundManager.death);
-            isBirdAlive = false;
             Debug.Log("Bird Died At Birdscript collison()");
             Go_Between_Pipe.death();
         }

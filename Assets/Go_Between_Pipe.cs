@@ -9,7 +9,6 @@ public class Go_Between_Pipe : Agent
     public Birdscript Birdscript;
     public RayPerceptionSensorComponent3D raySensor;
     public Vector3 startPosition;
-    public GameManger gameManager;
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -33,22 +32,15 @@ public class Go_Between_Pipe : Agent
         Debug.Log("Agent Initialized");
         startPosition = transform.position;
         Birdscript = GetComponent<Birdscript>();
-        gameManager = GameObject.FindGameObjectWithTag("Ml_Manager").GetComponent<GameManger>();
         raySensor = GetComponentInChildren<RayPerceptionSensorComponent3D>();
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.position = startPosition;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = Vector2.zero;  // Clear linear velocity
-        rb.angularVelocity = 0f;     // Clear angular velocity
-        transform.rotation = Quaternion.identity;  // Reset rotation to default
-
-        Birdscript.isBirdAlive = true;
-
+        // Reset position far from pipes (even slightly offset works)
+        LogicScript.restartgame();
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -61,14 +53,24 @@ public class Go_Between_Pipe : Agent
 
     public void death()
     {
-        Debug.Log("Bird Died At Go_between_Pipe Death()");
-        AddReward(-1.0f);
-        gameManager.AgentDied();  // triggers centralized check
-    }
+        if (!Birdscript.isBirdAlive) return; // Prevent duplicate calls when the bird is already dead
 
+        Birdscript.isBirdAlive = false; // Mark the bird as dead
+        Debug.Log("Bird Died At Go_Between_Pipe Death()");
+        AddReward(-1.0f);
+        EndEpisode();   //Episode End -> Calls OnEpisodeBegin()
+    }
 
     public void reward(float delta)
     {
         AddReward((float)delta);
     }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var discreteActions = actionsOut.DiscreteActions;
+        // 0 = Do nothing, 1 = Flap (jump)
+        discreteActions[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
+    }
+
 }
