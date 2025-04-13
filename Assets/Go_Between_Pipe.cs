@@ -12,17 +12,16 @@ public class Go_Between_Pipe : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        if (!Birdscript.isBirdAlive)
-        {
-            return;
-        }
-
-        AddReward(0.1f);
         int action = actions.DiscreteActions[0];
 
         if (action == 1)
         {
             Birdscript.jump();
+        }
+
+        if (Birdscript.isBirdAlive)
+        {
+            AddReward(0.1f);
         }
     }
 
@@ -37,7 +36,7 @@ public class Go_Between_Pipe : Agent
 
     public override void OnEpisodeBegin()
     {
-        // Reset position far from pipes (even slightly offset works)
+        //Resetting Game
         LogicScript.restartgame();
     }
 
@@ -46,7 +45,8 @@ public class Go_Between_Pipe : Agent
     {
         if (Birdscript.isBirdAlive && other.CompareTag("Score"))
         {
-            AddReward(0.5f);  // reward for crossing pipe
+            AddReward(1f);  // reward for crossing pipe
+            LogicScript.addscore(1);
             Debug.Log("Passed pipe!");
         }
     }
@@ -57,7 +57,7 @@ public class Go_Between_Pipe : Agent
 
         Birdscript.isBirdAlive = false; // Mark the bird as dead
         Debug.Log("Bird Died At Go_Between_Pipe Death()");
-        AddReward(-1.0f);
+        AddReward(-100.0f);
         EndEpisode();   //Episode End -> Calls OnEpisodeBegin()
     }
 

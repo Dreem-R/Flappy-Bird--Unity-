@@ -26,7 +26,7 @@ public class LogicScript : MonoBehaviour
     [ContextMenu("Increase Score")]
     public void addscore(int Scoretoadd)
     {
-        soundmanager.PlaySFX(soundmanager.point);
+        //soundmanager.PlaySFX(soundmanager.point);
         playerscore++;
         scoretext.text = playerscore.ToString();
     }
@@ -35,13 +35,19 @@ public class LogicScript : MonoBehaviour
     {
         playerscore = 0;
         scoretext.text = "0";
-        // Reset bird position, velocity, and other game elements here
+
+        // Reset bird physics
         Birdscript.myRigidbody2D.linearVelocity = Vector2.zero;
-        Birdscript.transform.position = new Vector3(0, 0, 0);  // Set to initial position
-        Birdscript.transform.rotation = Quaternion.identity;
         Birdscript.myRigidbody2D.angularVelocity = 0f;
+
+        // Reset bird transform relative to environment root
+        Birdscript.transform.localPosition = Vector3.zero;
+        Birdscript.transform.localRotation = Quaternion.identity;
+
+        // Mark bird alive
         Birdscript.isBirdAlive = true;
-        
+
+        // Reset pipes
         PipeSpawn.ResetPipes();
     }
 

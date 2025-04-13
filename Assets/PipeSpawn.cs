@@ -9,9 +9,14 @@ public class PipeSpawn : MonoBehaviour
     public float spawnrate = 2;
     private float timer = 0;
     public float heightoffset = 10;
-    
+    private int currentIndex = 0;
+    private int maxPipes = 3;
+
     void Start()
     {
+        pipes.Add(null);
+        pipes.Add(null);
+        pipes.Add(null);
         spawnpipe();
     }
 
@@ -28,29 +33,32 @@ public class PipeSpawn : MonoBehaviour
             timer = 0;
         }
     }
-    
 
+    
     public void ResetPipes()
     {
-        foreach (var pipe in pipes)
+        for (int i = 0; i < pipes.Count; i++)
         {
-            if (pipe != null)
+            if (pipes[i] != null)
             {
-                Destroy(pipe);
+                Destroy(pipes[i]);
+                pipes[i] = null;
             }
         }
-        pipes.Clear();
         timer = 0;
-
+        currentIndex=0;
         spawnpipe();
     }
-
+    
     void spawnpipe()
     {
         float lowestpoint = transform.position.y - heightoffset;
         float highestpoint = transform.position.y + heightoffset;
 
+
         GameObject newpipe = Instantiate(thepipe, new Vector3(transform.position.x, Random.Range(lowestpoint, highestpoint)), transform.rotation);
-        pipes.Add(newpipe);
+        pipes[currentIndex] = newpipe;
+
+        currentIndex = (currentIndex + 1) % maxPipes;
     }
 }
