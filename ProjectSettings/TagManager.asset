@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Logic
   - Soundfx
+  - Hitting
+  - Ml_Manager
+  - Score
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - Bird
   - Water
   - UI
-  - 
-  - 
+  - Hittable
+  - pipedestroy
   - 
   - 
   - 

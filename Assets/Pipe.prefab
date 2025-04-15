@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2099683823517902696}
   - component: {fileID: 2971855833368419027}
   - component: {fileID: 441458745125390248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomPipe
-  m_TagString: Untagged
+  m_TagString: Hitting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,9 +145,9 @@ GameObject:
   - component: {fileID: 3838139449984936833}
   - component: {fileID: 441100874070889700}
   - component: {fileID: 5305834055590186260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogicScript: {fileID: 0}
+  birdobj: {fileID: 0}
+  Go_Between_Pipe: {fileID: 0}
 --- !u!1 &3165891820527680595
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,9 +239,9 @@ GameObject:
   - component: {fileID: 3590844289063232441}
   - component: {fileID: 4822354601887081119}
   - component: {fileID: 8849820588011144039}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopPipe
-  m_TagString: Untagged
+  m_TagString: Hitting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

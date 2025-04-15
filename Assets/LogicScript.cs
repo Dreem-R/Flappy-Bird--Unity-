@@ -13,8 +13,10 @@ public class LogicScript : MonoBehaviour
     public Text scoredisplay;
     public Text highestscored;
     public int highscore;
+    public Birdscript Birdscript;
     public GameObject pausescreen;
     Sound_Manager soundmanager;
+    public PipeSpawn PipeSpawn;
 
     private void Awake()
     {
@@ -24,16 +26,29 @@ public class LogicScript : MonoBehaviour
     [ContextMenu("Increase Score")]
     public void addscore(int Scoretoadd)
     {
-        soundmanager.PlaySFX(soundmanager.point);
+        //soundmanager.PlaySFX(soundmanager.point);
         playerscore++;
         scoretext.text = playerscore.ToString();
     }
 
     public void restartgame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
+        playerscore = 0;
+        scoretext.text = "0";
 
+        // Reset bird physics
+        Birdscript.myRigidbody2D.linearVelocity = Vector2.zero;
+        Birdscript.myRigidbody2D.angularVelocity = 0f;
+
+        // Reset bird transform relative to environment root
+        Birdscript.transform.localPosition = Vector3.zero;
+        Birdscript.transform.localRotation = Quaternion.identity;
+
+        // Mark bird alive
+        Birdscript.isBirdAlive = true;
+
+        // Reset pipes
+        PipeSpawn.ResetPipes();
     }
 
     public void gameoverscreen()

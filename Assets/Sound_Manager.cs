@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Sound_Manager : MonoBehaviour
 {
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [Header("Audio Source")]
@@ -25,4 +26,5 @@ public class Sound_Manager : MonoBehaviour
     {
         SFX.PlayOneShot(clip);
     }
+    */
 }

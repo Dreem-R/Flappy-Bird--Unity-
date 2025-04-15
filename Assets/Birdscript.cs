@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Birdscript : MonoBehaviour
 {
@@ -9,48 +10,64 @@ public class Birdscript : MonoBehaviour
     public LogicScript LogicScript;
     public bool isBirdAlive = true;
     Sound_Manager soundManager;
-
+    public Go_Between_Pipe Go_Between_Pipe;
     private void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Soundfx").GetComponent<Sound_Manager>();
+        LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        if (Go_Between_Pipe == null)
+        {
+            Go_Between_Pipe = GetComponent<Go_Between_Pipe>();
+        }
     }
     void Start()
     {
 
-        LogicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) == true && isBirdAlive)
+        if (Input.GetKeyDown(KeyCode.Space) == true)
         {
-            myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
-            soundManager.PlaySFX(soundManager.flap);
+            jump();
         }
 
         else if (Input.GetKeyDown(KeyCode.Escape)){
             LogicScript.pause();
         }
 
-        if((myRigidbody2D.transform.position.y > 4.4 || myRigidbody2D.transform.position.y < -5 ) && isBirdAlive==true)
+        if ((myRigidbody2D.transform.localPosition.y > 4.4f || myRigidbody2D.transform.localPosition.y < -5f) && isBirdAlive == true)
         {
-            isBirdAlive=false;
-            LogicScript.gameoverscreen();
+            Debug.Log("Bird Died Out Of Screen Check");
+            Go_Between_Pipe.death();
         }
-        
+
+    }
+    public void jump()
+    {
+        if (isBirdAlive)
+        {
+            myRigidbody2D.linearVelocity = Vector2.up * flapspeed;
+            //soundManager.PlaySFX(soundManager.flap);
+        }
+        else
+        {
+            Debug.Log("Bird Not Alive");
+        }
     }
     public bool getbird()
     {
         return isBirdAlive;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isBirdAlive == true)
+        if (isBirdAlive == true && collision.gameObject.layer == LayerMask.NameToLayer("Hittable"))
         {
-            soundManager.PlaySFX(soundManager.death);
-            LogicScript.gameoverscreen();
-            isBirdAlive = false;
+            //soundManager.PlaySFX(soundManager.death);
+            Debug.Log("Bird Died At Birdscript collison()");
+            Go_Between_Pipe.death();
         }
     }
 }
