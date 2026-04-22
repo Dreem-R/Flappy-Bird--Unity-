@@ -55,10 +55,6 @@ This project combines the iconic Flappy Bird game mechanics with machine learnin
 
 3. Open the Unity project in Unity Editor
 
-### Usage
-
-[Add specific instructions for running the game and training agents]
-
 ## Project Structure
 
 ```
@@ -69,30 +65,18 @@ This project combines the iconic Flappy Bird game mechanics with machine learnin
 └── README.md           # This file
 ```
 
-## Training the Agent
-
-[Add detailed training instructions]
-
-## Results
-
-[Add information about agent performance and achievements]
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
-## License
-
-[Add your license information here - e.g., MIT, GPL, etc.]
-
 ## Author
 
-[Your name/contact information]
+Ruchak Khatri
 
 ## Acknowledgments
 
 - Original Flappy Bird concept by Dong Nguyen
-- [Any other acknowledgments or resources]
 
 ## Support
 
